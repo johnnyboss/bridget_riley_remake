@@ -77,6 +77,7 @@ void testApp::setup()
         stripes.push_back(stripe1);
     }
     
+    test.create(ofGetWidth()/2, ofGetHeight()/2,"diagonal", ofColor(255,255,0));
     cout<<stripes.size()<<endl;
     for(int i = 0; i < stripes.size(); i++)
     {
@@ -101,6 +102,8 @@ void testApp::update()
             }
         }
     }
+    
+    test.update();
     /*for(int i = 0; i < stripe2.size(); i ++)
     {
         stripe2[i].update();
@@ -145,6 +148,8 @@ void testApp::draw()
             stripes[j][i]->draw();
         }
     }
+    
+    test.draw();
     cout<<ofGetFrameRate()<<endl;
    /* for(int i = 0; i < stripe2.size(); i++)
     {

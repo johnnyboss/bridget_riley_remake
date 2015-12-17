@@ -68,7 +68,12 @@ struct cell
     {
         if(direction == "down")
         {
-            origin.y += 3;
+            origin.y += 1;
+        }
+        else
+        {
+            origin.y += 1;
+            origin.x -= 1;
         }
     }
     
@@ -148,6 +153,8 @@ private:
     vector<vertical_stripe*> stripe1, stripe2, stripe3, stripe4;
     
     vector< vector <vertical_stripe*> > stripes;
+    
+    cell test;
 };
 
 #endif
