@@ -48,19 +48,20 @@ struct cell
     {
         ofFill();
         ofSetColor(color.r, color.g, color.b, color.a);
-        ofBeginShape();
+        
+        glBegin(GL_QUADS) ;
         ofPoint aux;
+        
+        
+        glVertex2f(origin.x, origin.y) ;
         aux.x = origin.x + size.x;
         aux.y = origin.y - size.y * .8;
-        ofVertex(origin);
-        ofVertex(aux);
+        glVertex2f(aux.x, aux.y) ;
         aux += ofPoint(0,size.y);
-        ofVertex(aux);
+        glVertex2f(aux.x, aux.y) ;
         aux += ofPoint(-size.x, 0.8* size.y);
-        ofVertex(aux);
-        aux -= ofPoint(0,size.y);
-        ofVertex(aux);
-        ofEndShape();
+        glVertex2f(aux.x, aux.y) ;
+        glEnd() ;
     }
     
     void update()
