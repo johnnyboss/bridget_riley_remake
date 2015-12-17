@@ -77,7 +77,7 @@ void testApp::setup()
         stripes.push_back(stripe1);
     }
     
-    int nFloating = ofRandom(100,500);
+    int nFloating = ofRandom(400,500);
     cell aux;
 
     for(int i = 0; i < nFloating; i++)
@@ -85,7 +85,7 @@ void testApp::setup()
         int x = ofRandom(17);
         int y = ofRandom(4);
         int num_cell = ofRandom(7);
-        aux.create(stripes[x][y]->cells[num_cell]->origin.x,  stripes[x][y]->cells[num_cell]->origin.y,"diagonal", colors[ofRandom(7)]);
+        aux.create(stripes[x][y]->cells[num_cell]->origin.x + 1*17*60,  stripes[x][y]->cells[num_cell]->origin.y-30*30,"diagonal", colors[ofRandom(7)]);
         floating_cells.push_back(aux);
     }
     
@@ -157,6 +157,8 @@ void testApp::update()
 //--------------------------------------------------------------
 void testApp::draw()
 {
+    //ofScale(0.2,0.2);
+    //ofTranslate(0, 500);
     for(int j = 0; j < stripes.size(); j++)
     {
         for(int i = 0; i < stripes[j].size(); i++)
@@ -169,7 +171,7 @@ void testApp::draw()
     {
         floating_cells[i].draw();
     }
-    gui.draw();
+    //gui.draw();
    /* for(int i = 0; i < stripe2.size(); i++)
     {
         stripe2[i].draw();
