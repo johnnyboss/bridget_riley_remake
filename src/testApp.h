@@ -155,6 +155,7 @@ private:
     vector< vector <vertical_stripe*> > stripes;
     
     vector<cell> floating_cells;
+    bool hGui;
 };
 
 #endif

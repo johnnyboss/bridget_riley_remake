@@ -59,7 +59,7 @@ void testApp::setup()
     gui.add(&colors[5]);
     gui.add(&colors[6]);
     gui.loadFromFile("settings.xml");
-
+    hGui = false;
     
     for(int j = 0; j < 18; j++)
     {
@@ -171,7 +171,9 @@ void testApp::draw()
     {
         floating_cells[i].draw();
     }
-    //gui.draw();
+    
+    if(hGui)
+        gui.draw();
    /* for(int i = 0; i < stripe2.size(); i++)
     {
         stripe2[i].draw();
@@ -202,6 +204,7 @@ void testApp::keyPressed(int key)
 		case 'v':
 			break;
 		case 'h':
+            hGui = !hGui;
 			break;
 		case ' ':
 			break;
