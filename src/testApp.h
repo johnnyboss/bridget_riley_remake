@@ -55,11 +55,11 @@ struct cell
         
         glVertex2f(origin.x, origin.y) ;
         aux.x = origin.x + size.x;
-        aux.y = origin.y - size.y * .8;
+        aux.y = origin.y - size.y ;
         glVertex2f(aux.x, aux.y) ;
         aux += ofPoint(0,size.y);
         glVertex2f(aux.x, aux.y) ;
-        aux += ofPoint(-size.x, 0.8* size.y);
+        aux += ofPoint(-size.x,  size.y);
         glVertex2f(aux.x, aux.y) ;
         glEnd() ;
     }
@@ -72,7 +72,7 @@ struct cell
         }
         else
         {
-            origin.y += 1;
+            origin.y += 1.5;
             origin.x -= 1;
         }
     }
@@ -154,7 +154,7 @@ private:
     
     vector< vector <vertical_stripe*> > stripes;
     
-    cell test;
+    vector<cell> floating_cells;
 };
 
 #endif
