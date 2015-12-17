@@ -67,7 +67,7 @@ struct cell
     {
         if(direction == "down")
         {
-            origin.y += 5;
+            origin.y += 3;
         }
     }
     
@@ -78,25 +78,27 @@ struct cell
     
 };
 
-struct horizontal_stripe
+struct vertical_stripe
 {
     void create(int _x, int _y, ofColor _color)
     {
+        color = _color;
+
         for(int i = 0; i < 7; i++)
         {
-            cell aux;
-            color = _color;
-            aux.create(_x, _y + i*30, "down", color);
+            cell* aux;
+            aux = new cell();
+            aux->create(_x, _y + i*30, "down", color);
             cells.push_back(aux);
         }
     }
     
     void moveUp(int _y)
     {
-        cells[0].origin.y = _y;
+        cells[0]->origin.y = _y;
         for (int i = 0; i < cells.size(); i++)
         {
-            cells[i].origin.y = cells[0].origin.y + i*30;
+            cells[i]->origin.y = cells[0]->origin.y + i*30;
         }
     }
     
@@ -104,8 +106,8 @@ struct horizontal_stripe
     {
         for(int i = 0; i < cells.size(); i++)
         {
-            cells[i].color = color;
-            cells[i].update();
+            cells[i]->color = color;
+            cells[i]->update();
         }
     }
     
@@ -113,11 +115,11 @@ struct horizontal_stripe
     {
         for(int i = 0; i < cells.size(); i++)
         {
-            cells[i].draw();
+            cells[i]->draw();
         }
     }
     
-    vector<cell> cells;
+    vector<cell*> cells;
     ofColor color;
 };
 
@@ -142,7 +144,9 @@ private:
     ofxPanel gui;
     vector <ofxColorSlider> colors;
     
-    vector<horizontal_stripe> stripe1, stripe2, stripe3, stripe4;
+    vector<vertical_stripe*> stripe1, stripe2, stripe3, stripe4;
+    
+    vector< vector <vertical_stripe*> > stripes;
 };
 
 #endif

@@ -60,57 +60,48 @@ void testApp::setup()
     gui.add(&colors[6]);
     gui.loadFromFile("settings.xml");
 
-    ofColor auxColor = colors[ofRandom(0,7)];
 
-    for(int i = 0; i < 7; i ++)
+    for(int j = 0; j < 18; j++)
     {
-        horizontal_stripe aux;
-        aux.create(20, -190 + i*7*30, auxColor);
-        stripe1.push_back(aux);
+        ofColor auxColor = colors[ofRandom(0,7)];
+        
+        stripe1.clear();
+        for(int i = 0; i < 7; i ++)
+        {
+            vertical_stripe *aux;
+            aux = new vertical_stripe();
+            aux->create(20 + j * 60, -190 - j*30*0.8+ i*7*30, auxColor);
+            stripe1.push_back(aux);
+        }
+    
+        stripes.push_back(stripe1);
     }
-    auxColor = colors[ofRandom(0,7)];
-
-    for(int i = 0; i < 7; i ++)
+    
+    cout<<stripes.size()<<endl;
+    for(int i = 0; i < stripes.size(); i++)
     {
-        horizontal_stripe aux;
-        ofColor auxColor = colors[i];
-        aux.create(80, -190 - 30*.8 + i*7*30, auxColor);
-        stripe2.push_back(aux);
+        cout<<stripes[i].size()<<endl;
     }
-    auxColor = colors[ofRandom(0,7)];
-
-    for(int i = 0; i < 7; i ++)
-    {
-        horizontal_stripe aux;
-        ofColor auxColor = colors[i];
-        aux.create(80 + 60, -190 -60*.8 + i*7*30, auxColor);
-        stripe3.push_back(aux);
-    }
-    auxColor = colors[ofRandom(0,7)];
-
-    for(int i = 0; i < 7; i ++)
-    {
-        horizontal_stripe aux;
-        ofColor auxColor = colors[i];
-        aux.create(80 + 120, -190 -90*.8 + i*7*30, auxColor);
-        stripe4.push_back(aux);
-    }
+    
 }
 
 //--------------------------------------------------------------
 void testApp::update()
 {
 	ofBackground(0, 0, 0);
-    for(int i = 0; i < stripe1.size(); i ++)
+    for(int j = 0; j < stripes.size(); j++)
     {
-        stripe1[i].update();
-        if(stripe1[i].cells[0].origin.y > ofGetHeight() + stripe1[i].cells[0].size.y * .8)
+        for(int i = 0; i < stripes[j].size(); i ++)
         {
-            stripe1[i].moveUp(stripe1[i].cells[0].origin.y - 6*7*30);
-            stripe1[i].color = colors[ofRandom(0,7)];
+            stripes[j][i]->update();
+            if(stripes[j][i]->cells[0]->origin.y > ofGetHeight() + stripes[j][i]->cells[0]->size.y * .8)
+            {
+                stripes[j][i]->moveUp(stripes[j][i]->cells[0]->origin.y - 6*7*30);
+                stripes[j][i]->color = colors[ofRandom(0,7)];
+            }
         }
     }
-    for(int i = 0; i < stripe2.size(); i ++)
+    /*for(int i = 0; i < stripe2.size(); i ++)
     {
         stripe2[i].update();
         if(stripe2[i].cells[0].origin.y > ofGetHeight() + stripe2[i].cells[0].size.y * .8)
@@ -139,7 +130,7 @@ void testApp::update()
             stripe4[i].color = colors[ofRandom(0,7)];
 
         }
-    }
+    }*/
 
 }
 
@@ -147,11 +138,15 @@ void testApp::update()
 void testApp::draw()
 {
     gui.draw();
-    for(int i = 0; i < stripe1.size(); i++)
+    for(int j = 0; j < stripes.size(); j++)
     {
-        stripe1[i].draw();
+        for(int i = 0; i < stripes[j].size(); i++)
+        {
+            stripes[j][i]->draw();
+        }
     }
-    for(int i = 0; i < stripe2.size(); i++)
+    cout<<ofGetFrameRate()<<endl;
+   /* for(int i = 0; i < stripe2.size(); i++)
     {
         stripe2[i].draw();
     }
@@ -162,16 +157,13 @@ void testApp::draw()
     for(int i = 0; i < stripe4.size(); i++)
     {
         stripe4[i].draw();
-    }
+    }*/
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-    for(int i = 0; i < stripe1.size(); i++)
-    {
-        stripe1[i].update();
-    }
+    
 	switch (key){
 		case 'f':
 			break;
