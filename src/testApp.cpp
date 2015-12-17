@@ -60,7 +60,7 @@ void testApp::setup()
     gui.add(&colors[6]);
     gui.loadFromFile("settings.xml");
 
-
+    
     for(int j = 0; j < 18; j++)
     {
         ofColor auxColor = colors[ofRandom(0,7)];
